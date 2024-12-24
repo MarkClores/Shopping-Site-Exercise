@@ -1,34 +1,31 @@
-
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="login-page">
+    <div class="login-container">
+        <div class="card p-4 shadow-lg">
+            <h2 class="text-center mb-4">Login</h2>
 
-    <form class="form-signin" action='/login' method="POST">
+            {% if session.get('logged_in_customer_email') %}
+                <p class="text-center">You are already logged in. <a href="/melons">Go to Melons</a></p>
+            {% else %}
+                <form method="POST" action="/login">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                    </div>
 
-        <h2 class="form-signin-heading">Please Sign In</h2>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
 
-        <div class="form-group">
-            <label for="email-field" class="sr-only">Email Address</label>
-            <input type="email"
-                   name="email"
-                   class="form-control input-lg"
-                   placeholder="Email Address"
-                   required
-                   autofocus>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+                <p class="text-center mt-3">Don't have an account? <a href="/signup">Sign Up</a></p>
+            {% endif %}
         </div>
-
-        <div class="form-group">
-            <label for="password-field" class="sr-only">Password</label>
-            <input type="password"
-                   name="password"
-                   class="form-control input-lg"
-                   placeholder="Password"
-                   required>
-        </div>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In
-        </button>
-
-    </form>
-
+    </div>
+</div>
 {% endblock %}

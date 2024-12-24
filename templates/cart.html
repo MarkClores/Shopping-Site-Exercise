@@ -1,31 +1,43 @@
-
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="container cart-container my-5">
+    <div class="card p-4 shadow-lg">
+        <h2 class="text-center mb-4">My Melon Cart</h2>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Melon Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for melon_tuple in melon_info_tuples %}
-        <tr>
-            <td>{{ melon_tuple[0] }}</td>
-            <td>{{ melon_tuple[1] }}</td>
-            <td>${{ melon_tuple[2] }}</td>
-            <td>${{ melon_tuple[1] * melon_tuple[2] }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Melon Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for melon_tuple in melon_info_tuples %}
+            <tr>
+                <td>{{ melon_tuple[0] }}</td>
+                <td>{{ melon_tuple[1] }}</td>
+                <td>${{ melon_tuple[2] }}</td>
+                <td>${{ melon_tuple[1] * melon_tuple[2] }}</td>
+                <td>
+                    <a href="/remove_from_cart/{{ melon_tuple[3] }}" class="btn btn-danger btn-sm">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <h3>Total: $</h3>
+        <h3>Cart Summary</h3>
+        <p>Total Items: {{ total_quantity }}</p>
+        <p>Total Price: ${{ total_price }}</p>
 
-    <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
+        <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
 
+        <!-- Back to Shop Button -->
+        <a href="{{ url_for('list_melons') }}" class="btn btn-secondary mt-3">Back to Shop</a>
+    </div>
+</div>
 {% endblock %}

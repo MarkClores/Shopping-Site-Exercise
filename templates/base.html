@@ -1,7 +1,6 @@
 <html>
 <head>
-    <link rel="stylesheet"
-          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
     <link rel="stylesheet" href="/static/css/site.css"/>
 </head>
 
@@ -9,21 +8,26 @@
 
 <div class="navbar navbar-inverse navbar-static-top">
     <div class="container">
-
         <div class="navbar-header">
             <img src="/static/img/ubermelon-logo.png">
-            <a class="navbar-brand" href="/">Ubermelon</a>
+            <a class="navbar-brand" href="/melons">Ubermelon</a>
         </div>
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li id="home-link">
+                    <a href="/">
+                        Home
+                    </a>
+                </li>
+
                 <li>
                     <a href="/cart">
-                        <img class="melon-cart"
-                             src="/static/img/watermelon.png">
+                        <img class="melon-cart" src="/static/img/watermelon.png">
                         My Melon Cart
                     </a>
                 </li>
+
                 {% if "logged_in_customer_email" in session %}
                   <li><a href="/logout">Log Out</a></li>
                 {% else %}
@@ -31,24 +35,23 @@
                 {% endif %}
             </ul>
         </div>
-
     </div>
 </div>
 
-<div class="container">
+<header>
+    Your header content
+</header>
 
-  <!-- Show flashed messages -->
+<div class="container-fluid" style="min-height: 100vh;">
   {% with messages = get_flashed_messages() %}
       {% for message in messages %}
           <div class="alert alert-warning">{{ message }}</div>
       {% endfor %}
   {% endwith %}
 
-  <!-- This is where the main content goes. -->
   {% block body %}
       BODY OF PAGE GOES HERE VIA INHERITANCE
   {% endblock %}
-
 </div>
 
 </body>

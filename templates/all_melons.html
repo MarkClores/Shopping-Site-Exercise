@@ -1,24 +1,29 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h2>Top Selling Melons</h2>
+    <h2 class="text-center">Top Selling Melons</h2>
 
     <div id="melon-list" class="row">
       {% for melon in melon_list %}
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 melon-summary">
-
-              <div class="well">
-                  <h3><a href="/melon/{{ melon.id }}">{{ melon.common_name }}</a></h3>
-                  <a href="/melon/{{ melon.id }}">
-                      <img src="{{ melon.imgurl }}" class="img-circle">
-                  </a>
-
-                  <div class="price">{{ melon.price_str() }}</div>
-                  <a class="btn btn-primary" href="/melon/{{ melon.id }}">Details</a>
+          <div class="col-xs-12 col-sm-6 col-md-4 melon-summary">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="melon-container">
+                          <img src="{{ melon.imgurl }}" class="card-img-top" alt="{{ melon.common_name }}">
+                          <h5 class="card-title">{{ melon.common_name }}</h5>
+                          <p class="card-text">Price: {{ melon.price_str() }}</p>
+                          <div class="btn-group">
+                              <a href="/melon/{{ melon.id }}" class="btn btn-primary">Details</a>
+                              <a href="/add_to_cart/{{ melon.id }}" class="btn btn-success">Add to Cart</a>
+                          </div>
+                      </div>
+                  </div>
               </div>
-
           </div>
       {% endfor %}
     </div>
 
+    <footer>
+        <p>&copy; 2024 Ubermelon Shop. All rights reserved.</p>
+    </footer>
 {% endblock %}

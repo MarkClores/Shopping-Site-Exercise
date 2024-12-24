@@ -1,44 +1,289 @@
-/* Style for Ubermelon Shopping Site */
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #333;
+    padding: 3px 0;
+    box-sizing: border-box;
+}
 
-
-/* Style our Ubermelon logo. */
-
-div.navbar-header img {
+/* Navbar Logo */
+.navbar-header img {
     width: 30px;
-    float: left;
-    margin-top: 7px;
-    margin-right: 7px;
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+/* Navbar Title */
+.navbar-header a.navbar-brand {
+    font-size: 1.6em;
+    color: white;
+    line-height: 30px;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Navbar Links and Cart */
+.navbar-nav > li > a {
+    font-size: 1.1em;
+    color: white;
+    padding: 10px 15px;
+}
+
+#home-link {
+    margin-top: 4.5px;
+}
+
+#home-link > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Style the melon cart image */
+.melon-cart {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/* Navbar Login/Logout */
+.navbar-nav > li:last-child > a {
+    margin-top: 3px;
 }
 
 
-/* all-melons listing */
-
-div.melon-summary img {
-    width: 15em;
+/* Adjust body content padding to avoid elements behind navbar */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    height: 100%;
 }
 
-div.melon-summary .price {
-    margin: 0.5em 0;
-    font-size: 150%;
+/* Add padding to top of page content so it doesn't get hidden behind navbar */
+.container-fluid {
+    padding-top: 70px; /* Adjusted for a smaller navbar height */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #2d3e50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+/* Melon List Styling */
+#melon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* Neomorphism effect for melon containers */
+.melon-container {
+    background: #e0e5ec;
+    border-radius: 15px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Hover effect on melon container */
+.melon-container:hover {
+    box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.15), -12px -12px 20px rgba(255, 255, 255, 0.8);
+    transform: translateY(-5px);
+}
+
+.melon-container img {
+    max-height: 200px;
+    width: auto;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* Signup Page Specific Styling */
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    padding: 0; /* Remove any default padding */
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 400px; /* Set a max width for the signup container */
+    padding: 20px; /* Optional padding */
+}
+
+.card {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box; /* Ensure padding does not affect width calculation */
+}
+
+.card h2 {
+    font-size: 1.8em;
+}
+
+.card p {
+    text-align: center;
+}   
+
+/* Login Page Specific Styling */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0; 
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px; 
+    padding: 20px; 
+}
+
+.card {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.card h2 {
+    font-size: 1.8em;
+}
+
+.card p {
+    text-align: center;
+}
+
+/* Cart Page Specific Styling */
+.cart-container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.card {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+
+/* Button Styling */
+.btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Melon Details Page Styling */
+.melon-details-page {
+    padding: 20px;
+    max-width: 1200px; /* Set max width for the content */
+    margin: 0 auto; /* Center the content */
+}
+
+.melon-details-page h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Melon Image Styling */
+.melon-details-page img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Melon Info Section */
+.melon-info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Button Styling */
+.melon-info .btn {
+    margin: 5px;
+}
+
+/* Product Details Styling */
+.melon-details {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.melon-details h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.melon-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.melon-details li {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+/* Warning Message for Seeded Melons */
+.melon-details .warning {
+    color: #e74c3c;
     font-weight: bold;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+    .melon-details-page .row {
+        flex-direction: column;
+        align-items: center;
+    }
 
-/* melon-detail-page */
+    .melon-details-page .col-md-6 {
+        width: 100%;
+    }
 
-.warning {
-    color: red;
+    .melon-details-page img {
+        max-height: 250px; /* Adjust image size for smaller screens */
+    }
+
+    .melon-details {
+        padding: 15px;
+    }
 }
-
-
-.melon-cart {
-    height: 15px;
-}
-
-/* login form */
-
-.form-signin {
-  max-width: 330px;
-  margin: 5em auto 0 auto;  /* TRBL */
-}
-

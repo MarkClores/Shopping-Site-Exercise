@@ -1,7 +1,7 @@
 """Model for Ubermelon shopping site."""
 
 import sqlite3
-
+import hashlib
 
 class Melon(object):
     """An Ubermelon Melon type.
@@ -69,7 +69,7 @@ class Melon(object):
 
         melons = [Melon(*row) for row in melon_rows]
 
-        print melons
+        print(melons)
 
         return melons
 
@@ -117,9 +117,7 @@ class Customer(object):
 
     def __repr__(self):
         """Convenience method to show information about customer in console."""
-
-        return "<Customer: %s, %s>" % (
-            self.email, self.first_name + ' ' + self.last_name)
+        return "<Customer: %s, %s>" % (self.email, self.first_name + ' ' + self.last_name)
 
     @classmethod
     def get_by_email(cls, email):
@@ -137,14 +135,72 @@ class Customer(object):
             return None
 
         customer = Customer(*row)
-
         return customer
+
+    @classmethod
+    def create(cls, email, first_name, last_name, password):
+        """Create a new customer and insert them into the database."""
+        
+        cursor = db_connect()
+        QUERY = """
+            INSERT INTO Customers (email, first_name, last_name, password)
+            VALUES (?, ?, ?, ?)
+        """
+
+        cursor.execute(QUERY, (email, first_name, last_name, password))
+
+        # Commit the changes and close the connection
+        cursor.connection.commit()
+
+        # Return the new customer instance
+        return cls(email, first_name, last_name, password)
+    
+class Cart(object):
+    """Ubermelon shopping cart for a specific customer."""
+
+    @classmethod
+    def get_cart_for_customer(cls, customer_email):
+        """Get the cart for a specific customer."""
+        cursor = db_connect()
+        QUERY = """
+            SELECT melon_id, quantity
+            FROM Cart
+            WHERE customer_email = ?;
+        """
+        cursor.execute(QUERY, (customer_email,))
+        cart_items = cursor.fetchall()
+        return cart_items
+
+    @classmethod
+    def add_to_cart(cls, customer_email, melon_id):
+        """Add a melon to the cart of a specific customer."""
+        cursor = db_connect()
+        QUERY = """
+            INSERT OR REPLACE INTO Cart (customer_email, melon_id, quantity)
+            VALUES (?, ?, COALESCE((SELECT quantity FROM Cart WHERE customer_email = ? AND melon_id = ?), 0) + 1);
+        """
+        cursor.execute(QUERY, (customer_email, melon_id, customer_email, melon_id))
+        cursor.connection.commit()
+
+    @classmethod
+    def remove_from_cart(cls, customer_email, melon_id):
+        """Remove a melon from the cart of a specific customer."""
+        cursor = db_connect()
+        QUERY = """
+            DELETE FROM Cart
+            WHERE customer_email = ? AND melon_id = ?;
+        """
+        cursor.execute(QUERY, (customer_email, melon_id))
+        cursor.connection.commit()
+
+
+
 
 
 def db_connect():
     """Return a database cursor."""
-
     conn = sqlite3.connect("melons.db")
+    conn.execute('PRAGMA journal_mode=WAL;')  # Enable WAL mode
     cursor = conn.cursor()
     return cursor
 
